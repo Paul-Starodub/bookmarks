@@ -3,6 +3,14 @@ from typing import Optional
 from django.contrib.auth.models import User
 from django.http import HttpRequest
 
+from account.models import Profile
+
+
+def create_profile(
+    backend: str, user: User, *args: tuple, **kwargs: dict
+) -> None:
+    Profile.objects.get_or_create(user=user)
+
 
 class EmailAuthBackend:
 
