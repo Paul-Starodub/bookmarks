@@ -1,5 +1,18 @@
 from django.db import models
 from django.conf import settings
+from django.contrib.auth import get_user_model
+
+
+user_model = get_user_model()
+user_model.add_to_class(
+    "following",
+    models.ManyToManyField(
+        "self",
+        through="account.Contact",
+        related_name="followers",
+        symmetrical=False,
+    ),
+)
 
 
 class Profile(models.Model):
