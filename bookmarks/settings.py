@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 import os
 from pathlib import Path
+
+from django.urls import reverse_lazy
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -45,6 +47,7 @@ INSTALLED_APPS = [
     "django_extensions",
     "social_django",
     "images.apps.ImagesConfig",
+    "easy_thumbnails",
 ]
 
 MIDDLEWARE = [
@@ -172,3 +175,9 @@ SOCIAL_AUTH_PIPELINE = [
     "social_core.pipeline.social_auth.load_extra_data",
     "social_core.pipeline.user.user_details",
 ]
+
+ABSOLUTE_URL_OVERRIDES = {
+    "auth.user": lambda u: reverse_lazy(
+        "account:user_detail", args=[u.username]
+    )
+}
