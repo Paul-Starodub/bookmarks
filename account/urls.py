@@ -52,6 +52,8 @@ urlpatterns = [
         name="password_reset_complete",
     ),
     path("", views.dashboard, name="dashboard"),
+    path("users/", views.user_list, name="user_list"),
+    path("users/<username>/", views.user_detail, name="user_detail"),
 ]
 
 app_name = "account"
